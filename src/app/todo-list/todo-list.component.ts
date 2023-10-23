@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Todo } from '../models/Todo';
 import { TodoListService } from '../services/todo-list.service';
 
@@ -9,12 +9,29 @@ import { TodoListService } from '../services/todo-list.service';
 })
 export class TodoListComponent {
   todos: Todo[] = [];
+  todosDone: Todo[] = [];
+  todosNotDone: Todo[] = [];
 
   constructor(private todoListService: TodoListService) { }
 
   ngOnInit() {
     this.todoListService.getAllTodos().subscribe(todos => {
       this.todos = todos;
+      this.filterTodos()
     });
+  }
+
+  onTodoSelectionChange(event: any) {
+    const selectedTodo = event.options[0].value
+    this.todoListService.putTodo(selectedTodo.id, selectedTodo)
+      .subscribe(data => {
+        selectedTodo.id = data.id
+        this.filterTodos()
+      });
+  }
+
+  private filterTodos(): void {
+    this.todosDone = this.todos.filter(todo => todo.isDone);
+    this.todosNotDone = this.todos.filter(todo => !todo.isDone);
   }
 }

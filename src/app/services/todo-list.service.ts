@@ -15,4 +15,9 @@ export class TodoListService {
     return this.http.get<Todo[]>('/api/todos')
   }
 
+  putTodo(id: number, data: Todo) {
+    data.isDone = !data.isDone;
+    return this.http.put<Todo>("/api/todos/"+ id, data);
+  }
+
 }
