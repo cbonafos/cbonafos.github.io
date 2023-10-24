@@ -49,14 +49,9 @@ export class TodoListComponent {
   deleteTodo(todoId?: number): void {
     if (!todoId) return;
   
-    this.todoListService.deleteTodo(todoId).subscribe({
-      next: () => {
-        this.todos = this.todos.filter(todo => todo.id !== todoId);
-        this.filterTodos();
-      },
-      error: err => {
-        console.error('Failed to delete todo:', err);
-      }
+    this.todoListService.deleteTodo(todoId).subscribe(deletedTodo => {
+      this.todos = this.todos.filter(todo => todo.id !== todoId);
+      this.filterTodos();
     });
   }  
 }
