@@ -11,6 +11,7 @@ export class TodoListComponent {
   todos: Todo[] = [];
   todosDone: Todo[] = [];
   todosNotDone: Todo[] = [];
+  selectedTodo: Todo | undefined;
 
   constructor(private todoListService: TodoListService) { }
 
@@ -33,5 +34,9 @@ export class TodoListComponent {
   private filterTodos(): void {
     this.todosDone = this.todos.filter(todo => todo.isDone);
     this.todosNotDone = this.todos.filter(todo => !todo.isDone);
+  }
+
+  selectTodo(todo: Todo): void {
+    this.selectedTodo = todo;
   }
 }

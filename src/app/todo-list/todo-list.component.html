@@ -1,19 +1,36 @@
 <div class="container">
-    <h2>Todo List</h2>
+  <h2>Todo List</h2>
 
-    <mat-selection-list #alltodos (selectionChange)="onTodoSelectionChange($event)">
-        <ng-container *ngFor="let todo of todosNotDone">
-          <mat-list-option [selected]="todo.isDone" [value]="todo">
-            {{ todo.title }}
-          </mat-list-option>
-        </ng-container>
+  <mat-selection-list #alltodos (selectionChange)="onTodoSelectionChange($event)">
+    <ng-container *ngFor="let todo of todosNotDone">
+      <div class="todos">
+        <button mat-button [matMenuTriggerFor]="menu" color="primary" (click)="selectTodo(todo)">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-list-option [selected]="todo.isDone" [value]="todo">
+          {{ todo.title }}
+        </mat-list-option>
+      </div>
+    </ng-container>
 
-        <h2>Todo Done</h2>
-        
-        <ng-container *ngFor="let todo of todosDone">
-          <mat-list-option [selected]="todo.isDone" [value]="todo">
-            <div class="done">{{ todo.title }}</div>
-          </mat-list-option>
-        </ng-container>
-      </mat-selection-list>
+    <h2>Todo Done</h2>
+
+    <ng-container *ngFor="let todo of todosDone">
+      <div class="todos">
+        <button mat-button [matMenuTriggerFor]="menu" color="primary" (click)="selectTodo(todo)">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-list-option [selected]="todo.isDone" [value]="todo">
+          <div class="done">{{ todo.title }}</div>
+        </mat-list-option>
+      </div>
+    </ng-container>
+  </mat-selection-list>
 </div>
+
+<mat-menu #menu="matMenu">
+  <button [routerLink]="['/todo', selectedTodo?.id]" mat-menu-item>
+    <mat-icon>description</mat-icon>
+    <span>Open details</span>
+  </button>
+</mat-menu>

@@ -15,9 +15,13 @@ export class TodoListService {
     return this.http.get<Todo[]>('/api/todos')
   }
 
+  getTodoById(id: number): Observable<Todo> {
+    return this.http.get<Todo>('/api/todos/' + id);
+  }
+
   putTodo(id: number, data: Todo) {
     data.isDone = !data.isDone;
-    return this.http.put<Todo>("/api/todos/"+ id, data);
+    return this.http.put<Todo>('/api/todos/'+ id, data);
   }
 
 }

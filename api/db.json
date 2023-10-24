@@ -3,17 +3,20 @@
     {
       "id": 1,
       "title": "Make a Todo App",
-      "isDone": true
+      "isDone": true,
+      "description": "This is a description for step one."
     },
     {
       "id": 2,
-      "title": "Deploy the app",
-      "isDone": false
+      "title": "Deploy the App",
+      "isDone": false,
+      "description": "This is a description for step two."
     },
     {
       "id": 3,
       "title": "Enjoy your app 😎",
-      "isDone": false
+      "isDone": false,
+      "description": "This is a description for step three."
     }
   ]
 }
