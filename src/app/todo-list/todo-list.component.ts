@@ -11,7 +11,7 @@ export class TodoListComponent {
   todos: Todo[] = [];
   todosDone: Todo[] = [];
   todosNotDone: Todo[] = [];
-  selectedTodo: Todo | undefined;
+  selectedTodo: Todo = <Todo>{};
 
   constructor(private todoListService: TodoListService) { }
 
@@ -31,7 +31,8 @@ export class TodoListComponent {
       });
   }
 
-  private filterTodos(): void {
+  public filterTodos(): void {
+    this.todos.sort((a, b) => b.id! - a.id!);
     this.todosDone = this.todos.filter(todo => todo.isDone);
     this.todosNotDone = this.todos.filter(todo => !todo.isDone);
   }
@@ -39,4 +40,23 @@ export class TodoListComponent {
   selectTodo(todo: Todo): void {
     this.selectedTodo = todo;
   }
+
+  addNewTodo(todo: Todo): void {
+    this.todos.push(todo);
+    this.filterTodos();
+  }
+
+  deleteTodo(todoId?: number): void {
+    if (!todoId) return;
+  
+    this.todoListService.deleteTodo(todoId).subscribe({
+      next: () => {
+        this.todos = this.todos.filter(todo => todo.id !== todoId);
+        this.filterTodos();
+      },
+      error: err => {
+        console.error('Failed to delete todo:', err);
+      }
+    });
+  }  
 }

@@ -1,22 +1,22 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "Make a Todo App",
-      "isDone": true,
-      "description": "This is a description for step one."
+      "title": "Make an app",
+      "description": "Description #1",
+      "isDone": false,
+      "id": 1
     },
     {
-      "id": 2,
-      "title": "Deploy the App",
+      "title": "Deploy an app",
+      "description": "Description #2",
       "isDone": false,
-      "description": "This is a description for step two."
+      "id": 2
     },
     {
-      "id": 3,
-      "title": "Enjoy your app 😎",
+      "title": "Enjoy the app 😎",
+      "description": "Description #3",
       "isDone": false,
-      "description": "This is a description for step three."
+      "id": 3
     }
   ]
 }

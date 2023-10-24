@@ -1,0 +1,17 @@
+<mat-card class="list-card" appearance="outlined">
+    <form class="form-container" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+        <h2>Create new todo</h2>
+
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput id="title" type="text" formControlName="title" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput id="description" type="text" formControlName="description">
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" [disabled]="!todoForm.valid">Submit</button>
+    </form>
+</mat-card>
