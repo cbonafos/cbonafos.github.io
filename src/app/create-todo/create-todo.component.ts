@@ -20,14 +20,22 @@ export class CreateTodoComponent {
   });
 
   onSubmit(){
-    const todoData = {
+    const todoData = this.prepareTodoData();
+    this.todoListService.postTodo(todoData).subscribe({
+      next: todo => this.formSubmitted.emit(todo),
+      error: err => console.error("Error creating todo:", err)
+    });
+    this.todoForm.reset({
+      title: '',
+      description: ''
+    });
+  }
+
+  private prepareTodoData(): Todo {
+    return {
       title: this.todoForm.value.title!,
       description: this.todoForm.value.description!,
-      isDone: false,
+      isDone: false
     };
-    this.todoListService.postTodo(todoData).subscribe(e => {
-      this.formSubmitted.emit(e);
-    });
-    this.todoForm.reset()
   }
 }

@@ -10,14 +10,15 @@ import { Todo } from '../models/Todo';
 })
 export class TodoDetailComponent implements OnInit {
 
-  todo: Todo | null = null;
+  todo: Todo = <Todo>{};
 
   constructor(private todoService: TodoListService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
-    this.todoService.getTodoById(id).subscribe(todo => {
-      this.todo = todo;
+    this.todoService.getTodoById(id).subscribe({
+      next: todo => this.todo = todo,
+      error: err => console.error("Error fetching todo details:", err)
     });
   }
 }
